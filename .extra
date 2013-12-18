@@ -1,0 +1,19 @@
+source /Users/204471/nyt/nyt5-puppet/.nyt
+
+#svn
+alias svnpe="svn pe svn:externals files"
+alias svnup="svn up --ignore-externals"
+
+# -----------------------------------------------------------
+# NYT Servers
+# -----------------------------------------------------------
+alias app1='ssh reed.emmons@app1.prvt.nytimes.com'
+alias app3='ssh reed.emmons@app3.qprvt.nytimes.com'
+alias storage='ssh root@ec2-50-17-56-184.compute-1.amazonaws.com'
+alias monitoring='ssh root@ec2-54-211-2-153.compute-1.amazonaws.com'
+
+# -----------------------------------------------------------
+# Apps
+# -----------------------------------------------------------
+alias chrome-benchmark='open -a "Google Chrome" --args --enable-benchmarking --enable-net-benchmarking --enable-stats-table'
+alias canary-no-security='open -a Google\ Chrome\ Canary --args --disable-web-security'
