@@ -1,5 +1,5 @@
 # Add `~/bin` to the `$PATH`
-export PATH="$PATH:~/bin:$HOME/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/usr/local/share/npm/bin/"
+export PATH="$HOME/bin:$PATH"
 export SVN_EDITOR=nano
 
 # Load the shell dotfiles, and then some:
