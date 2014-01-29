@@ -26,3 +26,12 @@ function gitr() {
   git checkout -b release/$1
   git push origin release/$1
 }
+
+# -----------------------------------------------------------
+# gitf
+# -----------------------------------------------------------
+function gitf() {
+  git checkout develop
+  git checkout -b feature/$1
+  git push origin feature/$1
+}
