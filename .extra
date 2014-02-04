@@ -35,3 +35,19 @@ function gitf() {
   git checkout -b feature/$1
   git push origin feature/$1
 }
+
+# -----------------------------------------------------------
+# gitfd
+# -----------------------------------------------------------
+function gitfd() {
+  git branch -d feature/$1
+  git push origin :feature/$1
+}
+
+# -----------------------------------------------------------
+# gitrd
+# -----------------------------------------------------------
+function gitrd() {
+  git branch -d release/$1
+  git push origin :release/$1
+}
