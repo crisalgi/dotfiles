@@ -20,7 +20,7 @@ alias chrome-benchmark='open -a "Google Chrome" --args --enable-benchmarking --e
 alias canary-no-security='open -a Google\ Chrome\ Canary --args --disable-web-security'
 
 # -----------------------------------------------------------
-# gitr
+# gitr - RELEASE
 # -----------------------------------------------------------
 function gitr() {
   git checkout develop
@@ -29,7 +29,17 @@ function gitr() {
 }
 
 # -----------------------------------------------------------
-# gitf
+# gith - HOTFIX
+# -----------------------------------------------------------
+function gith() {
+  git checkout master
+  git pull
+  git checkout -b release/$1
+  git push origin release/$1
+}
+
+# -----------------------------------------------------------
+# gitf - FEATURE
 # -----------------------------------------------------------
 function gitf() {
   git checkout develop
@@ -38,7 +48,7 @@ function gitf() {
 }
 
 # -----------------------------------------------------------
-# gitfd
+# gitfd - DELETE FEATURE
 # -----------------------------------------------------------
 function gitfd() {
   git branch -d feature/$1
@@ -46,7 +56,7 @@ function gitfd() {
 }
 
 # -----------------------------------------------------------
-# gitrd
+# gitrd - DELETE RELEASE
 # -----------------------------------------------------------
 function gitrd() {
   git branch -d release/$1
