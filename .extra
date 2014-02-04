@@ -1,4 +1,5 @@
 source $HOME/nyt/nyt5-puppet/.nyt
+source ~/.git-completion
 
 #svn
 alias svnpe="svn pe svn:externals files"
