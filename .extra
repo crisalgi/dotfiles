@@ -20,35 +20,63 @@ alias chrome-benchmark='open -a "Google Chrome" --args --enable-benchmarking --e
 alias canary-no-security='open -a Google\ Chrome\ Canary --args --disable-web-security'
 
 # -----------------------------------------------------------
-# gitr - RELEASE
+# gitr - RELEASE - e.g. gitr article 1.1.0
 # -----------------------------------------------------------
 function gitr() {
-  git checkout develop
-  git checkout -b release/$1
-  git push origin release/$1
+  cd ~/nyt/nyt5-shared;
+  git checkout develop;
+  git pull;
+  git checkout -b release/$1/$2;
+  git push origin release/$1/$2;
+
+  cd ~/nyt/nyt5-foundation;
+  git checkout develop;
+  git pull;
+  git checkout -b release/$1/$2;
+  git push origin release/$1/$2;
+
+  cd ~/nyt/nyt5-app-$1;
+  git checkout develop;
+  git pull;
+  git checkout -b release/$2;
+  git push origin release/$2;
 }
 
 # -----------------------------------------------------------
-# gith - HOTFIX
+# gith - HOTFIX - e.g. gith article 1.1.1
 # -----------------------------------------------------------
 function gith() {
-  git checkout master
-  git pull
-  git checkout -b release/$1
-  git push origin release/$1
+  cd ~/nyt/nyt5-shared;
+  git checkout master;
+  git pull;
+  git checkout -b release/$1/$2;
+  git push origin release/$1/$2;
+
+  cd ~/nyt/nyt5-foundation;
+  git checkout master;
+  git pull;
+  git checkout -b release/$1/$2;
+  git push origin release/$1/$2;
+  
+  cd ~/nyt/nyt5-app-$1;
+  git checkout master;
+  git pull;
+  git checkout -b release/$2;
+  git push origin release/$2;
 }
 
 # -----------------------------------------------------------
-# gitf - FEATURE
+# gitf - FEATURE - e.g. gitf preferences-api
 # -----------------------------------------------------------
 function gitf() {
-  git checkout develop
-  git checkout -b feature/$1
-  git push origin feature/$1
+  git checkout develop;
+  git pull;
+  git checkout -b feature/$1;
+  git push origin feature/$1;
 }
 
 # -----------------------------------------------------------
-# gitfd - DELETE FEATURE
+# gitfd - DELETE FEATURE - e.g. gitfd preferences-api
 # -----------------------------------------------------------
 function gitfd() {
   git branch -d feature/$1
@@ -56,9 +84,21 @@ function gitfd() {
 }
 
 # -----------------------------------------------------------
-# gitrd - DELETE RELEASE
+# gitrd - DELETE RELEASE - e.g. gitrd article 1.1.0
 # -----------------------------------------------------------
 function gitrd() {
-  git branch -d release/$1
-  git push origin :release/$1
+  git branch -d release/$1;
+  git push origin :release/$1;
+
+  cd ~/nyt/nyt5-shared;
+  git branch -d release/$1/$2;
+  git push origin :release/$1/$2;
+
+  cd ~/nyt/nyt5-foundation;
+  git branch -d release/$1/$2;
+  git push origin :release/$1/$2;
+
+  cd ~/nyt/nyt5-app-$1;
+  git branch -d release/$2;
+  git push origin :release/$2;
 }
