@@ -23,46 +23,62 @@ alias canary-no-security='open -a Google\ Chrome\ Canary --args --disable-web-se
 # gitr - RELEASE - e.g. gitr article 1.1.0
 # -----------------------------------------------------------
 function gitr() {
-  cd ~/nyt/nyt5-shared;
-  git checkout develop;
-  git pull;
-  git checkout -b release/$1/$2;
-  git push -u origin release/$1/$2;
+  if [ "$1" == "foundation" ]; then
+    cd ~/nyt/nyt5-foundation;
+    git checkout develop;
+    git pull;
+    git checkout -b release/$2;
+    git push -u origin release/$2;
+  else
+    cd ~/nyt/nyt5-shared;
+    git checkout develop;
+    git pull;
+    git checkout -b release/$1/$2;
+    git push -u origin release/$1/$2;
 
-  cd ~/nyt/nyt5-foundation;
-  git checkout develop;
-  git pull;
-  git checkout -b release/$1/$2;
-  git push -u origin release/$1/$2;
+    cd ~/nyt/nyt5-foundation;
+    git checkout develop;
+    git pull;
+    git checkout -b release/$1/$2;
+    git push -u origin release/$1/$2;
 
-  cd ~/nyt/nyt5-app-$1;
-  git checkout develop;
-  git pull;
-  git checkout -b release/$2;
-  git push -u origin release/$2;
+    cd ~/nyt/nyt5-app-$1;
+    git checkout develop;
+    git pull;
+    git checkout -b release/$2;
+    git push -u origin release/$2;
+  fi
 }
 
 # -----------------------------------------------------------
 # gith - HOTFIX - e.g. gith article 1.1.1
 # -----------------------------------------------------------
 function gith() {
-  cd ~/nyt/nyt5-shared;
-  git checkout master;
-  git pull;
-  git checkout -b release/$1/$2;
-  git push -u origin release/$1/$2;
+  if [ "$1" == "foundation" ]; then
+    cd ~/nyt/nyt5-foundation;
+    git checkout master;
+    git pull;
+    git checkout -b release/$2;
+    git push -u origin release/$2;
+  else
+    cd ~/nyt/nyt5-shared;
+    git checkout master;
+    git pull;
+    git checkout -b release/$1/$2;
+    git push -u origin release/$1/$2;
 
-  cd ~/nyt/nyt5-foundation;
-  git checkout master;
-  git pull;
-  git checkout -b release/$1/$2;
-  git push -u origin release/$1/$2;
-  
-  cd ~/nyt/nyt5-app-$1;
-  git checkout master;
-  git pull;
-  git checkout -b release/$2;
-  git push -u origin release/$2;
+    cd ~/nyt/nyt5-foundation;
+    git checkout master;
+    git pull;
+    git checkout -b release/$1/$2;
+    git push -u origin release/$1/$2;
+
+    cd ~/nyt/nyt5-app-$1;
+    git checkout master;
+    git pull;
+    git checkout -b release/$2;
+    git push -u origin release/$2;
+  fi
 }
 
 # -----------------------------------------------------------
@@ -88,18 +104,25 @@ function gitfd() {
 # gitrd - DELETE RELEASE - e.g. gitrd article 1.1.0
 # -----------------------------------------------------------
 function gitrd() {
-  cd ~/nyt/nyt5-shared;
-  git checkout develop
-  git branch -d release/$1/$2;
-  git push origin :release/$1/$2;
+  if [ "$1" == "foundation" ]; then
+    cd ~/nyt/nyt5-foundation;
+    git checkout develop
+    git branch -d release/$2;
+    git push origin :release/$2;
+  else
+    cd ~/nyt/nyt5-shared;
+    git checkout develop
+    git branch -d release/$1/$2;
+    git push origin :release/$1/$2;
 
-  cd ~/nyt/nyt5-foundation;
-  git checkout develop
-  git branch -d release/$1/$2;
-  git push origin :release/$1/$2;
+    cd ~/nyt/nyt5-foundation;
+    git checkout develop
+    git branch -d release/$1/$2;
+    git push origin :release/$1/$2;
 
-  cd ~/nyt/nyt5-app-$1;
-  git checkout develop
-  git branch -d release/$2;
-  git push origin :release/$2;
+    cd ~/nyt/nyt5-app-$1;
+    git checkout develop
+    git branch -d release/$2;
+    git push origin :release/$2;
+  fi
 }
