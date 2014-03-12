@@ -1,6 +1,14 @@
 source $HOME/nyt/nyt5-puppet/.nyt
 source ~/.git-completion
 
+#git
+GIT_AUTHOR_NAME="Reed Emmons"
+GIT_COMMITTER_NAME="$GIT_AUTHOR_NAME"
+git config --global user.name "$GIT_AUTHOR_NAME"
+GIT_AUTHOR_EMAIL="reed.emmons@gmail.com"
+GIT_COMMITTER_EMAIL="$GIT_AUTHOR_EMAIL"
+git config --global user.email "$GIT_AUTHOR_EMAIL"
+
 #svn
 alias svnpe="svn pe svn:externals files"
 alias svnup="svn up --ignore-externals"
