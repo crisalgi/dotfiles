@@ -1,4 +1,4 @@
-source $HOME/nyt/nyt5-puppet/.nyt
+source /opt/nyt/sbx/.nyt
 source ~/.git-completion
 
 #git
@@ -133,4 +133,13 @@ function gitrd() {
     git branch -d release/$2;
     git push origin :release/$2;
   fi
+}
+
+# -----------------------------------------------------------
+# gitfd - DELETE BRANCH - e.g. gitfd feature/preferences-api
+# -----------------------------------------------------------
+function gitrebase() {
+  git rebase -s recursive -X ours develop
+  read -p "Should we continue?" qq
+  git pull -s recursive -X theirs
 }
