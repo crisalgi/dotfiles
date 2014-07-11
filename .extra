@@ -136,10 +136,20 @@ function gitrd() {
 }
 
 # -----------------------------------------------------------
-# gitfd - DELETE BRANCH - e.g. gitfd feature/preferences-api
+# gitrebase
 # -----------------------------------------------------------
 function gitrebase() {
   git rebase -s recursive -X ours develop
   read -p "Should we continue?" qq
   git pull -s recursive -X theirs
+}
+
+function releaseall() {
+  gitr foundation $1
+  gitr article $1
+  gitr interactive $1
+  gitr shell $1
+  gitr leonhardt $1
+  gitr homepage $1
+  gitr blogs $1
 }
