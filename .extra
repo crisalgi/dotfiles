@@ -144,6 +144,9 @@ function gitrebase() {
   git pull -s recursive -X theirs
 }
 
+# -----------------------------------------------------------
+# releaseall
+# -----------------------------------------------------------
 function releaseall() {
   gitr foundation $1
   gitr article $1
@@ -152,4 +155,37 @@ function releaseall() {
   gitr leonhardt $1
   gitr homepage $1
   gitr blogs $1
+}
+
+# -----------------------------------------------------------
+# replace masters
+# -----------------------------------------------------------
+function replacemasters() {
+  sbx checkout develop
+
+  cd ~/nyt/nyt5-shared
+  git branch -d master
+
+  cd ~/nyt/nyt5-foundation
+  git branch -d master
+
+  cd ~/nyt/nyt5-app-homepage
+  git branch -d master
+
+  cd ~/nyt/nyt5-app-article
+  git branch -d master
+
+  cd ~/nyt/nyt5-app-interactive
+  git branch -d master
+
+  cd ~/nyt/nyt5-app-leonhardt
+  git branch -d master
+
+  cd ~/nyt/nyt5-app-paidpost
+  git branch -d master
+
+  cd ~/nyt/nyt5-app-shell
+  git branch -d master
+
+  sbx checkout master
 }
