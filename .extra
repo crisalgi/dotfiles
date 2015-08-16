@@ -1,4 +1,10 @@
-source /opt/nyt/sbx/.nyt
+#!/bin/bash
+if [ -f /opt/nyt/sbx/.nyt ]; then
+  source /opt/nyt/sbx/.nyt
+fi
+if [ -f ~/.github_token ]; then
+  export HOMEBREW_GITHUB_API_TOKEN="$(cat ~/.github_token)"
+fi
 source ~/.git-completion
 
 #git
@@ -17,78 +23,8 @@ alias svnup="svn up --ignore-externals"
 # -----------------------------------------------------------
 # NYT Servers
 # -----------------------------------------------------------
-alias app1='ssh reed.emmons@app1.prvt.nytimes.com'
-alias app3='ssh reed.emmons@app3.qprvt.nytimes.com'
 alias storage='ssh root@ec2-50-17-56-184.compute-1.amazonaws.com'
 alias monitoring='ssh root@ec2-54-211-2-153.compute-1.amazonaws.com'
-
-# -----------------------------------------------------------
-# Apps
-# -----------------------------------------------------------
-alias chrome-benchmark='open -a "Google Chrome" --args --enable-benchmarking --enable-net-benchmarking --enable-stats-table'
-alias canary-no-security='open -a Google\ Chrome\ Canary --args --disable-web-security'
-
-# -----------------------------------------------------------
-# gitr - RELEASE - e.g. gitr article 1.1.0
-# -----------------------------------------------------------
-function gitr() {
-  if [ "$1" == "foundation" ]; then
-    cd ~/nyt/nyt5-foundation;
-    git checkout develop;
-    git pull;
-    git checkout -b release/$2;
-    git push -u origin release/$2;
-  else
-    cd ~/nyt/nyt5-shared;
-    git checkout develop;
-    git pull;
-    git checkout -b release/$1/$2;
-    git push -u origin release/$1/$2;
-
-    cd ~/nyt/nyt5-foundation;
-    git checkout develop;
-    git pull;
-    git checkout -b release/$1/$2;
-    git push -u origin release/$1/$2;
-
-    cd ~/nyt/nyt5-app-$1;
-    git checkout develop;
-    git pull;
-    git checkout -b release/$2;
-    git push -u origin release/$2;
-  fi
-}
-
-# -----------------------------------------------------------
-# gith - HOTFIX - e.g. gith article 1.1.1
-# -----------------------------------------------------------
-function gith() {
-  if [ "$1" == "foundation" ]; then
-    cd ~/nyt/nyt5-foundation;
-    git checkout master;
-    git pull;
-    git checkout -b release/$2;
-    git push -u origin release/$2;
-  else
-    cd ~/nyt/nyt5-shared;
-    git checkout master;
-    git pull;
-    git checkout -b release/$1/$2;
-    git push -u origin release/$1/$2;
-
-    cd ~/nyt/nyt5-foundation;
-    git checkout master;
-    git pull;
-    git checkout -b release/$1/$2;
-    git push -u origin release/$1/$2;
-
-    cd ~/nyt/nyt5-app-$1;
-    git checkout master;
-    git pull;
-    git checkout -b release/$2;
-    git push -u origin release/$2;
-  fi
-}
 
 # -----------------------------------------------------------
 # gitf - FEATURE - e.g. gitf preferences-api
@@ -110,83 +46,10 @@ function gitfd() {
 }
 
 # -----------------------------------------------------------
-# gitrd - DELETE RELEASE - e.g. gitrd article 1.1.0
-# -----------------------------------------------------------
-function gitrd() {
-  if [ "$1" == "foundation" ]; then
-    cd ~/nyt/nyt5-foundation;
-    git checkout develop
-    git branch -d release/$2;
-    git push origin :release/$2;
-  else
-    cd ~/nyt/nyt5-shared;
-    git checkout develop
-    git branch -d release/$1/$2;
-    git push origin :release/$1/$2;
-
-    cd ~/nyt/nyt5-foundation;
-    git checkout develop
-    git branch -d release/$1/$2;
-    git push origin :release/$1/$2;
-
-    cd ~/nyt/nyt5-app-$1;
-    git checkout develop
-    git branch -d release/$2;
-    git push origin :release/$2;
-  fi
-}
-
-# -----------------------------------------------------------
 # gitrebase
 # -----------------------------------------------------------
 function gitrebase() {
   git rebase -s recursive -X ours develop
   read -p "Should we continue?" qq
   git pull -s recursive -X theirs
-}
-
-# -----------------------------------------------------------
-# releaseall
-# -----------------------------------------------------------
-function releaseall() {
-  gitr foundation $1
-  gitr article $1
-  gitr interactive $1
-  gitr shell $1
-  gitr leonhardt $1
-  gitr homepage $1
-  gitr blogs $1
-}
-
-# -----------------------------------------------------------
-# replace masters
-# -----------------------------------------------------------
-function replacemasters() {
-  sbx checkout develop
-
-  cd ~/nyt/nyt5-shared
-  git branch -d master
-
-  cd ~/nyt/nyt5-foundation
-  git branch -d master
-
-  cd ~/nyt/nyt5-app-homepage
-  git branch -d master
-
-  cd ~/nyt/nyt5-app-article
-  git branch -d master
-
-  cd ~/nyt/nyt5-app-interactive
-  git branch -d master
-
-  cd ~/nyt/nyt5-app-leonhardt
-  git branch -d master
-
-  cd ~/nyt/nyt5-app-paidpost
-  git branch -d master
-
-  cd ~/nyt/nyt5-app-shell
-  git branch -d master
-
-  sbx checkout master
 }
