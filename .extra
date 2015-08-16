@@ -1,4 +1,6 @@
 #!/bin/bash
+export DOTFILES=true
+
 if [ -f /opt/nyt/sbx/.nyt ]; then
   source /opt/nyt/sbx/.nyt
 fi
